@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <h1>Image Zoom</h1>
+
+    <p>Mouse over the image:</p>
+
+    <div class="img-zoom-container">
+      <div class="img-zoom-lens" onmouseout="displayNone()"></div>
+      <img
+        id="myimage"
+        src="./asset/img/beauty_1573184889611.JPG"
+        width="300"
+        height="440"
+        onmouseover="imageZoom()"
+        ></img>
+        <div id="myresult" class="img-zoom-result"></div>
+    </div>
+  </body>
+  <script src="index.js"></script>
+</html>

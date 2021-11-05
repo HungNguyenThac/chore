@@ -1,0 +1,58 @@
+:root {
+  --White-color: #fff;
+  --black-color: #0000;
+  --text-color: #666;
+  --primary-color: rgb(238, 77, 45);
+  --hder-height: 120px;
+  --hder__nbar-height: 38px;
+  --hder__logo__search-height: 82px;
+  --animation-scale: hiddenShow linear 0.2s;
+  --animation-opacity: opacity linear 0.2s;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62,5%;
+  line-height: 1,6rem;
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+}
+
+.padding--left--right {
+  padding-left: 0.475rem;
+  padding-right: 0.475rem;
+}
+
+.padding--left {
+  padding-left: 0.475rem;
+}
+
+.padding--right {
+  padding-right: 0.475rem;
+}
+
+@keyframes opacity {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scale {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.2);
+  }
+}
+
+
+

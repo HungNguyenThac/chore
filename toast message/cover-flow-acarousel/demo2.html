@@ -1,0 +1,269 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>jQuery Acarousel.js Cover Flow Style Carousel Advanced Example</title>
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" rel="stylesheet" type="text/css">
+<style>
+	body { background-color: #f7f7f7; }
+	#content { margin: 150px auto; max-width: 760px; text-align: center; }
+#carousel_container {
+	width: 95%;
+	max-width: 600px;
+	height: 300px;
+	margin: 0 auto;
+	position: relative;
+	overflow: hidden;
+}
+#carousel {
+	width: 600px;
+	height: 300px;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	list-style-type: none;
+}
+#carousel li {
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+#carousel li img {
+	width: 100%;
+	height: 100%;
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+#c1 {
+	width: 300px;
+	height: 250px;
+	left: 150px;
+	top: 25px;
+	z-index: 3;
+}
+#c2 {
+	width: 240px;
+	height: 200px;
+	left: 300px;
+	top: 50px;
+	z-index: 2;
+}
+#c3 {
+	width: 180px;
+	height: 150px;
+	left: 420px;
+	top: 75px;
+	z-index: 1;
+}
+#x1 {
+	width: 120px;
+	height: 100px;
+	left: 600px;
+	top: 100px;
+}
+#x2 {
+	width: 120px;
+	height: 100px;
+	left: -120px;
+	top: 100px;
+}
+#c4 {
+	width: 180px;
+	height: 150px;
+	left: 0px;
+	top: 75px;
+	z-index: 1;
+}
+#c5 {
+	width: 240px;
+	height: 200px;
+	left: 60px;
+	top: 50px;
+	z-index: 2;
+}
+
+.move img {
+	width: 50px;
+	height: 30px;
+	border: 3px solid #333;
+}
+.move.active img {
+	border: 3px solid #5a5;
+}
+
+#move_mark {
+	width: 95%;
+	max-width: 500px;
+	margin: 5px auto;
+	position: relative;
+	bottom: 0;
+}
+#move_mark a {
+	color: #666;
+	font-size: 20px;
+	font-weight: bold;
+	text-decoration: none;
+}
+#move_mark a.active, #move_mark a:hover {
+	color: #333;
+}
+#move_back {
+	margin: 0 10px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+#move_next {
+	margin: 0 10px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="jquery.acarousel.min.js"></script>
+<script>
+$(function () {
+	var len = $("#carousel").children().length;
+	var acarousel = $("#carousel").acarousel({
+		moveStep: function (elem, index, pos_index, t) {
+			if (pos_index >= 3 && pos_index < len - 3 || pos_index == len - 3 && t == 0) {
+				elem.hide();
+			}
+		}
+	});
+
+	changeActive();
+
+	$("#carousel li a").click(function() {
+		var move = acarousel.moveByElem($(this).parent());
+		changeActive(move);
+		return false;
+	});
+
+	$("#move_back").click(function () {
+		var move = acarousel.move(1);
+		changeActive(move);
+		return false;
+	});
+
+	$("#move_next").click(function () {
+		var move = acarousel.move(-1);
+		changeActive(move);
+		return false;
+	});
+
+	$(".move").click(function () {
+
+		var pos = acarousel.getPos();
+		pos = pos.index % 5 + pos.point;
+		pos = parseInt($(".move").index(this)) - pos;
+
+		var diff1 = Math.abs(pos) % 5 * (pos < 0 ? 1 : -1);
+		var diff2 = (10 - (Math.abs(pos) + 5)) % 5 * (pos < 0 ? -1 : 1);
+
+		move = acarousel.move(Math.abs(diff1) < Math.abs(diff2) ? diff1 : diff2);
+		changeActive(move);
+		return false;
+	});
+
+	function changeActive(move) {
+		var index = acarousel.getPos(move).index % 5;
+		$(".move").removeClass("active").eq(index).addClass("active");
+	}
+
+	$(window).resize(function () {
+		var parent = $("#carousel_container");
+		var self = $("#carousel");
+		self.css({
+			left: parent.width() / 2 - self.width() / 2
+			, top: parent.height() / 2 - self.height() / 2
+		});
+	}).trigger("resize");
+
+});
+</script>
+</head>
+
+<body>
+<div id="jquery-script-menu">
+<div class="jquery-script-center">
+<ul>
+<li><a href="https://www.jqueryscript.net/slider/cover-flow-acarousel.html">Download This Plugin</a></li>
+<li><a href="https://www.jqueryscript.net/">Back To jQueryScript.Net</a></li>
+</ul><div id="carbon-block"></div>
+<div class="jquery-script-ads"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<div class="jquery-script-clear"></div>
+</div>
+</div>
+<div id="content">
+		<h1>jQuery Acarousel.js Cover Flow Style Carousel Advanced Example</h1>
+		<div id="carousel_container">
+			<ul id="carousel">
+				<li id="c1"><a href="#"><img src="img1.jpg"></a></li>
+				<li id="c2"><a href="#"><img src="img2.jpg"></a></li>
+				<li id="c3"><a href="#"><img src="img3.jpg"></a></li>
+				<li id="x1"><a href="#"><img src="img4.jpg"></a></li>
+				<li id="x1"><a href="#"><img src="img5.jpg"></a></li>
+				<li id="x1"><a href="#"><img src="img1.jpg"></a></li>
+				<li id="x1"><a href="#"><img src="img2.jpg"></a></li>
+				<li id="x2"><a href="#"><img src="img3.jpg"></a></li>
+				<li id="c4"><a href="#"><img src="img4.jpg"></a></li>
+				<li id="c5"><a href="#"><img src="img5.jpg"></a></li>
+			</ul>
+		</div>
+		<div id="move_mark">
+			<a class="move" href="#"><img src="img1.jpg"></a>
+			<a class="move" href="#"><img src="img2.jpg"></a>
+			<a class="move" href="#"><img src="img3.jpg"></a>
+			<a class="move" href="#"><img src="img4.jpg"></a>
+			<a class="move" href="#"><img src="img5.jpg"></a>
+			<div id="move_back"><a href="#">←</a></div>
+			<div id="move_next"><a href="#">→</a></div>
+		</div>
+
+</div>
+<script>
+try {
+  fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
+    return true;
+  }).catch(function(e) {
+    var carbonScript = document.createElement("script");
+    carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
+    carbonScript.id = "_carbonads_js";
+    document.getElementById("carbon-block").appendChild(carbonScript);
+  });
+} catch (error) {
+  console.log(error);
+}
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>
